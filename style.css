@@ -101,3 +101,11 @@
 	filter: brightness(1);
 	border: 5px solid lightgrey;
 }
+
+.reverse{
+	position: absolute;
+	z-index: 20;
+	padding: 10px 10px;
+	font-size: 20px;
+	background-color: rgb(255, 179, 0);
+}
