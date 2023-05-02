@@ -69,5 +69,6 @@
 }
 
 .text{
+	display: none;
 	position:absolute;
 }
