@@ -22,41 +22,10 @@ const images = [
     }
 ];
 
-
-const containerHighlighted = document.querySelector(".highlighted")
-const textImg = document.querySelector(".text")
-const containerThumb = document.querySelector(".thumb");
-
-
-
-for (let key of images) {
-    containerHighlighted.innerHTML += `<img src="${key.image}"></img>`
-
-    textImg.innerHTML += 
-    `<h1>${key.title}</h1>
-     <p>${key.text}</p>`
-
-    containerThumb.innerHTML += `<img src="${key.image}"></img>`
-
-}
-
-
-
-const listHighlighted = document.querySelectorAll('.highlighted img');
-const listText = document.querySelectorAll('.text');
-const listThumb = document.querySelectorAll('.thumb img');
-
-const btnPrev = document.querySelector('.btn-prev');
-const btnNext = document.querySelector('.btn-next');
-
-
-
 let activeIndex = 0
 
-btnPrev.addEventListener('click', function () {
-
+setInterval(() => {
     listHighlighted[activeIndex].classList.remove('active');
-    listText[activeIndex].classList.remove('active');
     listThumb[activeIndex].classList.remove('active');
 
     activeIndex++
@@ -66,7 +35,49 @@ btnPrev.addEventListener('click', function () {
     }
 
     listHighlighted[activeIndex].classList.add('active');
-    listText[activeIndex].classList.add('active');
+    listThumb[activeIndex].classList.add('active');
+}, 1000);
+
+const containerHighlighted = document.querySelector(".highlighted")
+// const textImg = document.querySelector(".text")
+const containerThumb = document.querySelector(".thumb");
+
+
+for (let i = 0; i < images.length; i++) {
+    containerHighlighted.innerHTML += `<img src="${images[i].image}" class="${i == 0 ? "active" : ''}"></img>`
+
+    // textImg.innerHTML += 
+    // `<h1 class="${i == 0 ? "active" : ''}">${images[i].title}</h1>
+    //  <p class="${i == 0 ? "active" : ''}">${images[i].text}</p>`
+
+    containerThumb.innerHTML += `<img src="${images[i].image}" class="${i == 0 ? "active" : ''}"></img>`
+
+}
+
+
+const listHighlighted = document.querySelectorAll('.highlighted img');
+// const listTextH1 = document.querySelectorAll('.text');
+const listThumb = document.querySelectorAll('.thumb img');
+
+const btnPrev = document.querySelector('.btn-prev');
+const btnNext = document.querySelector('.btn-next');
+
+
+
+btnPrev.addEventListener('click', function () {
+
+    listHighlighted[activeIndex].classList.remove('active');
+    // listText[activeIndex].classList.remove('active');
+    listThumb[activeIndex].classList.remove('active');
+
+    activeIndex++
+
+    if (activeIndex >= listHighlighted.length) {
+        activeIndex = 0
+    }
+
+    listHighlighted[activeIndex].classList.add('active');
+    // listText[activeIndex].classList.add('active');
     listThumb[activeIndex].classList.add('active');
 })
 
@@ -75,7 +86,7 @@ btnPrev.addEventListener('click', function () {
 btnNext.addEventListener('click', function () {
     
     listHighlighted[activeIndex].classList.remove('active');
-    listText[activeIndex].classList.remove('active');
+    // listText[activeIndex].classList.remove('active');
     listThumb[activeIndex].classList.remove('active');
 
     activeIndex--
@@ -85,7 +96,7 @@ btnNext.addEventListener('click', function () {
     }
 
     listHighlighted[activeIndex].classList.add('active');
-    listText[activeIndex].classList.add('active');
+    // listText[activeIndex].classList.add('active');
 	listThumb[activeIndex].classList.add('active');
 })
 
@@ -96,10 +107,10 @@ for (let i = 0; i < listThumb.length; i++) {
 listThumb[i].addEventListener('click', function () {
 
     listHighlighted[activeIndex].classList.remove('active');
-    listText[activeIndex].classList.remove('active');
+    // listText[activeIndex].classList.remove('active');
     listThumb[activeIndex].classList.remove('active');
     activeIndex = i;
     listHighlighted[activeIndex].classList.add('active');
-    listText[activeIndex].classList.add('active');
+    // listText[activeIndex].classList.add('active');
     listThumb[activeIndex].classList.add('active');
 })}

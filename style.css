@@ -71,4 +71,5 @@
 .text{
 	display: none;
 	position:absolute;
+	z-index: 100;
 }
