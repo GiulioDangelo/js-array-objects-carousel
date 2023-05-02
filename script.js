@@ -22,52 +22,38 @@ const images = [
     }
 ];
 
-let activeIndex = 0
 
-setInterval(() => {
-    listHighlighted[activeIndex].classList.remove('active');
-    listThumb[activeIndex].classList.remove('active');
-
-    activeIndex++
-
-    if (activeIndex >= listHighlighted.length) {
-        activeIndex = 0
-    }
-
-    listHighlighted[activeIndex].classList.add('active');
-    listThumb[activeIndex].classList.add('active');
-}, 1000);
-
-const containerHighlighted = document.querySelector(".highlighted")
-// const textImg = document.querySelector(".text")
+const containerHighlighted = document.querySelector(".highlighted");
 const containerThumb = document.querySelector(".thumb");
 
 
 for (let i = 0; i < images.length; i++) {
-    containerHighlighted.innerHTML += `<img src="${images[i].image}" class="${i == 0 ? "active" : ''}"></img>`
+    containerHighlighted.innerHTML += `<div class="img_container ${i == 0 ? 'active' : ''}">
+    <img src="${images[i].image}" alt="" class="${i == 0 ? 'active' : ''}">
+    <h2 class="title">${images[i].title}</h2>
+    <p class="text">${images[i].text}</p>
+    </div>`;
 
-    // textImg.innerHTML += 
-    // `<h1 class="${i == 0 ? "active" : ''}">${images[i].title}</h1>
-    //  <p class="${i == 0 ? "active" : ''}">${images[i].text}</p>`
+   
 
     containerThumb.innerHTML += `<img src="${images[i].image}" class="${i == 0 ? "active" : ''}"></img>`
 
 }
 
 
-const listHighlighted = document.querySelectorAll('.highlighted img');
-// const listTextH1 = document.querySelectorAll('.text');
+const listHighlighted = document.querySelectorAll('.highlighted .img_container');
 const listThumb = document.querySelectorAll('.thumb img');
+const backward = document.querySelector('.reverse');
 
 const btnPrev = document.querySelector('.btn-prev');
 const btnNext = document.querySelector('.btn-next');
+let activeIndex = 0
 
 
 
-btnPrev.addEventListener('click', function () {
+btnNext.addEventListener('click', function () {
 
     listHighlighted[activeIndex].classList.remove('active');
-    // listText[activeIndex].classList.remove('active');
     listThumb[activeIndex].classList.remove('active');
 
     activeIndex++
@@ -77,16 +63,14 @@ btnPrev.addEventListener('click', function () {
     }
 
     listHighlighted[activeIndex].classList.add('active');
-    // listText[activeIndex].classList.add('active');
     listThumb[activeIndex].classList.add('active');
 })
 
 
 
-btnNext.addEventListener('click', function () {
+btnPrev.addEventListener('click', function () {
     
     listHighlighted[activeIndex].classList.remove('active');
-    // listText[activeIndex].classList.remove('active');
     listThumb[activeIndex].classList.remove('active');
 
     activeIndex--
@@ -96,8 +80,42 @@ btnNext.addEventListener('click', function () {
     }
 
     listHighlighted[activeIndex].classList.add('active');
-    // listText[activeIndex].classList.add('active');
 	listThumb[activeIndex].classList.add('active');
+})
+
+
+
+let forward = setInterval(() => {
+    listHighlighted[activeIndex].classList.remove('active');
+    listThumb[activeIndex].classList.remove('active');
+
+    activeIndex++
+
+    if (activeIndex >= listHighlighted.length) {
+        activeIndex = 0
+    }
+
+    listHighlighted[activeIndex].classList.add('active');
+    listThumb[activeIndex].classList.add('active');
+}, 3000);
+
+
+
+backward.addEventListener('click' , function () {
+    clearInterval(forward);
+    setInterval(() => {
+        listHighlighted[activeIndex].classList.remove('active');
+        listThumb[activeIndex].classList.remove('active');
+    
+        activeIndex--
+    
+        if (activeIndex < 0) {
+            activeIndex = listHighlighted.length - 1;
+        }
+    
+        listHighlighted[activeIndex].classList.add('active');
+        listThumb[activeIndex].classList.add('active');
+    }, 1000);
 })
 
 
@@ -107,10 +125,8 @@ for (let i = 0; i < listThumb.length; i++) {
 listThumb[i].addEventListener('click', function () {
 
     listHighlighted[activeIndex].classList.remove('active');
-    // listText[activeIndex].classList.remove('active');
     listThumb[activeIndex].classList.remove('active');
     activeIndex = i;
     listHighlighted[activeIndex].classList.add('active');
-    // listText[activeIndex].classList.add('active');
     listThumb[activeIndex].classList.add('active');
 })}
